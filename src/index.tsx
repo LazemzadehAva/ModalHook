@@ -1,26 +1,40 @@
 import * as React from 'react'
-import { Button, NativeModules, StyleSheet, Text, View } from 'react-native'
+import { useRef, useState } from 'react'
 
-export const addOne = (input: number) => input + 1
+import { NativeModules, Animated } from 'react-native'
+import BaseModal from './BaseModal'
 
-export const Counter = () => {
-  const [count, setCount] = React.useState(0)
+export const UseModal = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const opacity = useRef(new Animated.Value(0)).current
 
-  return (
-    <View style={styles.container}>
-      <Text>You pressed {count} times</Text>
-      <Button onPress={() => setCount(addOne(count))} title='Press Me' />
-    </View>
-  )
+  const open = () => {
+    setIsOpen(true)
+    Animated.spring(opacity, {
+      toValue: 1,
+      useNativeDriver: true,
+    }).start()
+  }
+
+  const close = () => {
+    console.log('close')
+    Animated.spring(opacity, {
+      toValue: 0,
+      useNativeDriver: true,
+    }).start(() => setIsOpen(false))
+  }
+  const ContentWrapper = ({ children }: any) => {
+    return (
+      <BaseModal
+        opacity={opacity}
+        children={children}
+        isOpen={isOpen}
+        close={close}
+      />
+    )
+  }
+
+  return { open, close, ContentWrapper, isOpen }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 200,
-  },
-})
-
-export default NativeModules.RNModuleTemplateModule
+export default NativeModules.RNModalHookModule
