@@ -1,6 +1,6 @@
 {
   "name": "rn-use-modal-hook",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Modal Hook is a customizable, reusable, and performant React Native modal hook with a responsive UI. It allows you to easily create custom modals without the need to pass props, making it easy to implement modals in your React Native projects. The hook is written in React Native, JavaScript, and TypeScript, and it does not require any external dependencies. With Modal Hook, you can show and hide modals with just a few lines of code and customize the modal's appearance and animation to match your app's design. Contributions to the project are welcome!",
   "homepage": "https://github.com/LazemzadehAva/ModalHook#readme",
   "main": "lib/index.js",
