@@ -6,9 +6,9 @@ Modal Hook is a customizable, reusable, and performant React Native modal hook w
 
 To install UseModal, you can use npm or yarn:
 
-npm install rn-modal-hook
+npm install rn-use-modal-hook
 
-yarn add rn-modal-hook
+yarn add rn-use-modal-hook
 
 # Usage
 
@@ -17,46 +17,41 @@ To use UseModal in your React Native project, import the hook and call it in you
 ```
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
-import { UseModal } from 'rn-modal-hook';
+import { UseModal } from 'rn-use-modal-hook';
 
-const Children = () => {
-const { open, close, ContentWrapper, isOpen } = UseModal();
+const App = () => {
+  const {open, isOpen, ContentWrapper, close} = UseModal();
+  console.log({isOpen});
 
-const onOpen = () => {
-open();
+  const onOpen = () => {
+    console.log('open', {isOpen});
+    open();
+  };
+  return (
+    <>
+      <View style={styles.container}>
+        <TouchableOpacity
+          onPress={() => {
+            onOpen();
+          }}
+          style={styles.btn}>
+          <Text>hi</Text>
+        </TouchableOpacity>
+      </View>
+      <ContentWrapper>
+        <View style={{alignSelf: 'center'}}>
+          <Text>hi</Text>
+          <TouchableOpacity style={styles.btn} onPress={close}>
+            <Text>close me</Text>
+          </TouchableOpacity>
+        </View>
+      </ContentWrapper>
+    </>
+  );
 };
 
-return (
-<>
-<TouchableOpacity onPress={onOpen} style={styles.btn}>
-<Text>Click me</Text>
-</TouchableOpacity>
-<ContentWrapper>
-<View style={{ alignSelf: 'center' }}>
-<Text>Hi there!</Text>
-<TouchableOpacity style={styles.btn} onPress={close}>
-<Text>Close me</Text>
-</TouchableOpacity>
-</View>
-</ContentWrapper>
-</>
-);
-};
+export default App;
 
-export default Children;
-
-const styles = StyleSheet.create({
-btn: {
-borderRadius: 10,
-aspectRatio: 1.9,
-borderColor: 'blue',
-borderWidth: 1,
-alignItems: 'center',
-justifyContent: 'center',
-width: 80,
-marginTop: 100,
-},
-});
 ```
 The UseModal hook returns the following properties:
 
